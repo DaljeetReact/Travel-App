@@ -1,8 +1,9 @@
 import React from 'react'
 
-function PlaceDetails() {
+function PlaceDetails({place}:any) {
+  const {name} = place
   return (
-    <div>PlaceDetails</div>
+    <div>{name}</div>
   )
 }
 
