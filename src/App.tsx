@@ -1,6 +1,6 @@
 import React from 'react';
 import { CssBaseline,Grid } from '@mui/material';
-import {Header,Map,List} from '../components'
+import {Header,Map,List} from './components'
 function App() {
   return (<>
     <CssBaseline/>
