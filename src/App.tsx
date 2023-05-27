@@ -7,7 +7,7 @@ import { propType } from './components/types';
 
 function App() {
   const [Places, setPlaces] = useState<propType>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [coordinate, setCoordinate] = useState({lat:0,lng:0});
   const [bounds, setBounds] = useState<boundsType|any>({});
@@ -19,11 +19,12 @@ function App() {
   console.log({Places});
   useEffect(() => {
     setIsLoading(true);
-    getPlacesData(bounds.sw,bounds.ne).then((data:any) => {
-      setPlaces(data);
-      setIsLoading(false);
-
-    })
+    if(!isLoading) {
+      getPlacesData(bounds.sw,bounds.ne).then((data:any) => {
+        setPlaces(data);
+        setIsLoading(false);  
+      })
+    }
   }, [coordinate,bounds]);
   
   return (<>
@@ -42,7 +43,7 @@ function App() {
               bounds={bounds}
               coordinate={coordinate}
             />
-        </Grid>
+        </Grid>     
     </Grid>
   </>);
 }
