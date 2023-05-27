@@ -1,32 +1,39 @@
-import React, { useState,useEffect } from 'react';
-import { CssBaseline,Grid } from '@mui/material';
-import {Header,Map,List} from './components'
-import {getPlacesData}   from './components/apis';
-import {boundsType } from './components/Consts';
+import { CssBaseline, Grid } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Header, List, Map } from './components';
+import { boundsType } from './components/Consts';
+import { getPlacesData } from './components/apis';
+import { propType } from './components/types';
+
 function App() {
-  const [Places, setPlaces] = useState([]);
+  const [Places, setPlaces] = useState<propType>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [coordinate, setCoordinate] = useState({lat:0,lng:0});
   const [bounds, setBounds] = useState<boundsType|any>({});
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({coords:{latitude,longitude}})=> {
       setCoordinate({lat:latitude,lng:longitude});
     })  
   }, []);
-
+  console.log({Places});
   useEffect(() => {
+    setIsLoading(true);
     getPlacesData(bounds.sw,bounds.ne).then((data:any) => {
       setPlaces(data);
+      setIsLoading(false);
+
     })
   }, [coordinate,bounds]);
-  console.log({Places,coordinate,bounds});
   
   return (<>
     <CssBaseline/>
     <Header/>
-    <Grid container spacing={3} style={{width: '100%'}}> 
+    <Grid container spacing={1} style={{width: '100%'}}> 
         <Grid item xs={12} md={4}>
-          <List Places={Places} />
+          {Places?.length&&(
+            <List Places={Places} isLoading={isLoading} />
+          )}
         </Grid>
         <Grid item xs={12} md={8}>
             <Map

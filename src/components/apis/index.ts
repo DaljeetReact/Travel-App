@@ -15,7 +15,7 @@ export const getPlacesData = async (sw:boundsType,ne:boundsType)=> {
               }
         };
         const {data:{data}} = await axios.get(`${url}/restaurants/list-in-boundary`,options);
-            console.log({data});
+          
         return data;
     }catch(error){
         console.log(error);

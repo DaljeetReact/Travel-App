@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
 import StarIcon from '@mui/icons-material/Star';
-import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select, Box } from '@mui/material';
-import useStyles from './Styles'
+import { Box, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import { useState } from 'react';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
-function List({Places}:any) {
+import { placeType, propType } from '../types';
+import useStyles from './Styles';
+import CircularProgress from '@mui/material/CircularProgress';
+function List({Places,isLoading}:{Places:propType,isLoading:boolean}) {
   const { classes } = useStyles();
   const [Type, setType] = useState('restaurants')
   const [Rating, setRating] = useState('')
-
+  console.log({Places});
   return (
     <div className={classes.container}>
       <Typography variant="h6" mb={3}>Restaurants,Hotels & Attractions</Typography>
@@ -42,11 +44,20 @@ function List({Places}:any) {
       </Box>
       
       <Grid container spacing={3} className={classes.list}>
-          {Places?.map((item:any,i:any) =>(
-            <Grid item key={i} xs={12}>
-               <PlaceDetails place={item} />
+
+      {isLoading?(
+        <Box  margin={'auto'}>
+          <CircularProgress/>
+        </Box>
+        ):(
+          <>
+           {Places?.map((place:placeType,i:any) =>(
+            <Grid item key={i} xs={12} mx={1}>
+               <PlaceDetails place={place} />
             </Grid>
           ))}
+          </>
+        )}
       </Grid>
     </div>
   )
