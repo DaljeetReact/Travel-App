@@ -26,27 +26,18 @@ function App() {
     })  
   }, []);
 
-
-  useEffect(() => {
-    setIsLoading(true);
-    if(!isLoading) {
-      getPlacesData(bounds.sw,bounds.ne,Type).then((data:any) => {
-        setPlaces(data);
-        setIsLoading(false);  
-        setRating(5);
-      })
-    }
-  }, [Type]);
   
   useEffect(() => {
-    setIsLoading(true);
-    if(!isLoading) {
-      getPlacesData(bounds.sw,bounds.ne).then((data:any) => {
-        setPlaces(data);
-        setIsLoading(false);  
-      })
+    if(bounds.sw && bounds.ne){
+      setIsLoading(true);
+      if(!isLoading) {
+        getPlacesData(bounds.sw,bounds.ne,Type).then((data:any) => {
+          setPlaces(data);
+          setIsLoading(false);  
+        })
+      }
     }
-  }, [coordinate,bounds]);
+  }, [Type,bounds]);
   
   return (<>
     <CssBaseline/>
