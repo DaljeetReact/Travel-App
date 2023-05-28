@@ -8,16 +8,22 @@ import { placeType } from '../types';
 import { Box, Chip, Rating } from '@mui/material';
 import {LocalPhone,LocationOn} from '@mui/icons-material';
 import useStyles from './style';
+import { useEffect, useRef } from 'react';
 
-export default function PlaceDetails({ place }: { place: placeType }) {
+export default function PlaceDetails({ place,selected,setRefs,elRef,index}: { place: placeType,selected:any,setRefs:any,index:number,elRef:any }) {
   const { name, photo } = place;
   let ImgUrl: string = photo ? photo.images.medium.url : 'https://www.kalypsofarms.com/wp-content/uploads/2019/08/dummy.png';
-  const { classes } = useStyles();
-  if (!place) {
-    <div>No results found.</div>
-  }
+  const { classes } = useStyles(); 
+
+  const CardRef = useRef(null);
+  let arr:Array<any> = elRef;
+       arr[index] = CardRef;
+  useEffect(() => {
+        setRefs(arr);
+  }, [CardRef])
+  
   return (
-    <Card>
+    <Card  ref={CardRef}>
       <CardMedia
         sx={{ height: 200 }}
         style={{ objectFit: 'contain' }}
@@ -25,7 +31,7 @@ export default function PlaceDetails({ place }: { place: placeType }) {
         title="green iguana"
       />
       <CardContent>
-      <Typography gutterBottom variant="h5">{place.name}</Typography>
+      <Typography gutterBottom variant="h5">{name}</Typography>
         <Box display="flex" justifyContent="space-between" my={2}>
           <Rating name="read-only" value={Number(place.rating)} readOnly />
           <Typography component="legend">{place.num_reviews} review{Number(place.num_reviews) >1&&'s'}</Typography>

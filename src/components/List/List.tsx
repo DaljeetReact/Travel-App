@@ -1,15 +1,25 @@
+import { useState,useRef,useEffect, Ref } from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
-import { useState } from 'react';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import { placeType, propType } from '../types';
 import useStyles from './Styles';
 import CircularProgress from '@mui/material/CircularProgress';
-function List({Places,isLoading}:{Places:propType,isLoading:boolean}) {
+function List({Places,isLoading,ChildClicked}:{Places:propType,isLoading:boolean,ChildClicked:any}) {
   const { classes } = useStyles();
   const [Type, setType] = useState('restaurants')
   const [Rating, setRating] = useState('')
-  console.log({Places});
+  const [elRef, setRefs] = useState<any>([]);
+
+  useEffect(() => {
+    elRef[ChildClicked]?.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
+    });
+  },[ChildClicked]);
+
+
   return (
     <div className={classes.container}>
       <Typography variant="h6" mb={3}>Restaurants,Hotels & Attractions</Typography>
@@ -51,9 +61,14 @@ function List({Places,isLoading}:{Places:propType,isLoading:boolean}) {
         </Box>
         ):(
           <>
-           {Places?.map((place:placeType,i:any) =>(
+           {Places?.map((place:placeType,i:number) =>(
             <Grid item key={i} xs={12} mx={1}>
-               <PlaceDetails place={place} />
+               <PlaceDetails place={place} 
+                selected={(ChildClicked) === i} 
+                setRefs={setRefs}
+                elRef={elRef}
+                index={i}
+              />
             </Grid>
           ))}
           </>

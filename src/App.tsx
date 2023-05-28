@@ -8,7 +8,7 @@ import { propType } from './components/types';
 function App() {
   const [Places, setPlaces] = useState<propType>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const [ChildClicked, setonChildClicked] = useState(null);
   const [coordinate, setCoordinate] = useState({lat:0,lng:0});
   const [bounds, setBounds] = useState<boundsType|any>({});
   useEffect(() => {
@@ -16,7 +16,7 @@ function App() {
       setCoordinate({lat:latitude,lng:longitude});
     })  
   }, []);
-  console.log({Places});
+  
   useEffect(() => {
     setIsLoading(true);
     if(!isLoading) {
@@ -33,7 +33,7 @@ function App() {
     <Grid container spacing={1} style={{width: '100%'}}> 
         <Grid item xs={12} md={4}>
           {Places?.length&&(
-            <List Places={Places} isLoading={isLoading} />
+            <List Places={Places} isLoading={isLoading} ChildClicked={ChildClicked} />
           )}
         </Grid>
         <Grid item xs={12} md={8}>
@@ -42,6 +42,8 @@ function App() {
               setBounds={setBounds}
               bounds={bounds}
               coordinate={coordinate}
+              Places={Places}
+              setonChildClicked={setonChildClicked}
             />
         </Grid>     
     </Grid>
