@@ -22,7 +22,7 @@ function Map({Places,setCoordinate,coordinate,setBounds,bounds,setonChildClicked
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyBwQZWmYNj02EbjMD-GwdZj735RhF55KLo" }}
+        bootstrapURLKeys={{ key: `${process.env.REACT_APP_GOOGLEKEY}`}}
         defaultCenter={coordinate}
         center={coordinate}
         defaultZoom={14}

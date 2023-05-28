@@ -13,6 +13,7 @@ function App() {
   const [coordinate, setCoordinate] = useState({lat:0,lng:0});
   const [bounds, setBounds] = useState<boundsType|any>({});
   const [Rating, setRating] = useState(5)
+  const [autocomplete, setAutocomplete] = useState<any>(null);
   const [FilteredPlaces, setFilteredPlaces] = useState<propType>([]);
   useEffect(() => {
     const filtered = Places.filter((Place) => Number(Place.rating) > Rating);
@@ -28,25 +29,32 @@ function App() {
 
   
   useEffect(() => {
+    console.log({Type,bounds})
     if(bounds.sw && bounds.ne){
       setIsLoading(true);
       if(!isLoading) {
-        getPlacesData(bounds.sw,bounds.ne,Type).then((data:any) => {
-          setPlaces(data);
+        getPlacesData(bounds.sw,bounds.ne,Type).then((data:propType) => {
+          setPlaces(data.filter(place=>place.name && place.num_reviews));
           setIsLoading(false);  
         })
       }
     }
   }, [Type,bounds]);
-  
+
   return (<>
     <CssBaseline/>
-    <Header/>
+    <Header setAutocomplete={setAutocomplete} setCoordinate={setCoordinate}/>
     <Grid container spacing={1} style={{width: '100%'}}> 
         <Grid item xs={12} md={4}>
-          {Places?.length&&(
-            <List Places={FilteredPlaces.length > 1?FilteredPlaces:Places} isLoading={isLoading} ChildClicked={ChildClicked} setType={setType} Type={Type} Rating={Rating} setRating={setRating}/>
-          )}
+          <List 
+            Places={FilteredPlaces.length > 1?FilteredPlaces:Places} 
+            isLoading={isLoading} ChildClicked={ChildClicked} 
+            setType={setType} 
+            Type={Type} 
+            Rating={Rating} 
+            setRating={setRating}
+          />
+       
         </Grid>
         <Grid item xs={12} md={8}>
             <Map
