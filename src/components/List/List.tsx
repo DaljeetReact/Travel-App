@@ -5,10 +5,8 @@ import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import { placeType, propType } from '../types';
 import useStyles from './Styles';
 import CircularProgress from '@mui/material/CircularProgress';
-function List({Places,isLoading,ChildClicked}:{Places:propType,isLoading:boolean,ChildClicked:any}) {
+function List({Places,isLoading,ChildClicked,setType,Type,setRating,Rating}:{Places:propType,isLoading:boolean,ChildClicked:any,setType:any,Type:string,setRating:any,Rating:any}) {
   const { classes } = useStyles();
-  const [Type, setType] = useState('restaurants')
-  const [Rating, setRating] = useState('')
   const [elRef, setRefs] = useState<any>([]);
 
   useEffect(() => {
@@ -43,12 +41,12 @@ function List({Places,isLoading,ChildClicked}:{Places:propType,isLoading:boolean
             label="Rating"
             className={classes.formControl}
           >
-            <MenuItem value={'0'}><StarIcon fontSize='small'/> 0</MenuItem>
-            <MenuItem value={'1'}><StarIcon fontSize='small'/> 1</MenuItem>
-            <MenuItem value={'2'}><StarIcon fontSize='small'/> 2</MenuItem>
-            <MenuItem value={'3'}><StarIcon fontSize='small'/> 3</MenuItem>
-            <MenuItem value={'4'}><StarIcon fontSize='small'/> 4</MenuItem>
-            <MenuItem value={'5'}><StarIcon fontSize='small'/> 5</MenuItem>
+            <MenuItem value={0}><StarIcon fontSize='small'/> 0</MenuItem>
+            <MenuItem value={1}><StarIcon fontSize='small'/> 1</MenuItem>
+            <MenuItem value={2}><StarIcon fontSize='small'/> 2</MenuItem>
+            <MenuItem value={3}><StarIcon fontSize='small'/> 3</MenuItem>
+            <MenuItem value={4}><StarIcon fontSize='small'/> 4</MenuItem>
+            <MenuItem value={5}><StarIcon fontSize='small'/> 5</MenuItem>
           </Select>
         </FormControl>
       </Box>
