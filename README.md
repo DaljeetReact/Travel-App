@@ -1,46 +1,44 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# implementation 
+## Data fetching 
+    google-map for showing map, and google place-api for searching places and Rapid api platform for fetching data from Travel Advisor 
+    
+## Designing 
+    MUI library and css
 
-In the project directory, you can run:
+## Data sharing between component 
+for sharing data between component i used  Prop drilling method
 
-### `npm start`
+# Working
+in this app you able able to check all the hotels,restaurant and attractions in single app you and auto able to find anywhere in the work with the help of search bar in header, the app has the capability to get the place when you try to change or scroll to map to any direction, it will provide you new location base on type
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Download and Run
+githubLink : https://github.com/DaljeetReact/Travel-App
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Install my-project with npm
 
-### `npm run build`
+```bash
+  cd Travel-App
+  npm Install
+  npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### create account in https://rapidapi.com/ 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Enable Travel Advisor Api in your account
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### create account in https://console.cloud.google.com/getting-started
 
-### `npm run eject`
+Create new api key under credientails, enable library javasctipy map and place api under library section 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+create new .env fle
+```env
+REACT_APP_RapidAPI_Key=
+REACT_APP_RapidAPI_Host=
+REACT_APP_GOOGLEKEY=
+```
+[![Watch the video](/Screenshot.png)](/Google%20Travel%20App.mp4)
